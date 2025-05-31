@@ -187,7 +187,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                     if(context instanceof Activity){
                         (((Activity)context)).runOnUiThread(() -> {
                             messageList.clear();
-                            notifyDataSetChanged();
+                            messageList.remove(message);
                             showdefault.showBot();
                         });
                     }
