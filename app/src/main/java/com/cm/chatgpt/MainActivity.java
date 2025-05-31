@@ -5,7 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -111,12 +114,25 @@ public class MainActivity extends AppCompatActivity implements GenderListener, D
         });
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager != null ? connectivityManager.getActiveNetworkInfo() : null;
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     private void sendChatRequest() {
         promptString = chatEditText.getText().toString().trim();
         if (promptString.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Please enter prompt", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        if(!isNetworkAvailable()){
+            Toast.makeText(getApplicationContext(), "Please check you connection and try again", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         chatRecycler.setVisibility(View.VISIBLE);
         chatbotTxt.setVisibility(View.GONE);
         chatbot_icon.setVisibility(View.GONE);

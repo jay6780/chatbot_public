@@ -184,14 +184,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             if(isDeleteAll){
                 databaseExecutor.execute(() -> {
                     chatMessageDao.deleteAll();
-                    if(context instanceof Activity){
-                        (((Activity)context)).runOnUiThread(() -> {
-                            messageList.clear();
-                            messageList.remove(message);
-                            showdefault.showBot();
-                        });
-                    }
                 });
+                messageList.clear();
+                messageList.remove(message);
+                showdefault.showBot();
+
             }else{
                 databaseExecutor.execute(() -> {
                     chatMessageDao.delete(message);
