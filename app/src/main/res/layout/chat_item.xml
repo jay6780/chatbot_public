@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/userAvatar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end" />
+
+    <com.daasuu.bl.BubbleLayout
+        android:id="@+id/user_bubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_toLeftOf="@+id/userAvatar"
+        android:padding="8dp"
+        app:bl_arrowDirection="right"
+        app:bl_arrowHeight="10dp"
+        app:bl_arrowPosition="1dp"
+        app:bl_arrowWidth="10dp"
+        app:bl_cornersRadius="6dp"
+        app:bl_strokeWidth="1dp">
+
+        <TextView
+            android:id="@+id/userMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000" />
+    </com.daasuu.bl.BubbleLayout>
+
+
+    <app.m4ntis.blinkingloader.BlinkingLoader
+        android:id="@+id/dotLoading1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_bubble"
+        android:layout_toRightOf="@+id/aiavatar"
+        android:visibility="gone"
+        app:auto_start="true"
+        android:layout_marginTop="30dp"
+        app:dot_blinkingColor="#000000"
+        app:dot_margin="3dp"
+        app:dot_neutralColor="#000000"
+        app:dot_num_dots="4" />
+
+    <ImageView
+        android:id="@+id/aiavatar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/user_bubble"
+        android:layout_gravity="end"
+        android:layout_marginTop="10dp" />
+
+    <com.daasuu.bl.BubbleLayout
+        android:id="@+id/bot_bubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_bubble"
+        android:layout_gravity="start"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@+id/aiavatar"
+        android:padding="8dp"
+        app:bl_arrowDirection="left"
+        app:bl_arrowHeight="10dp"
+        app:bl_arrowPosition="2dp"
+        app:bl_arrowWidth="10dp"
+        app:bl_cornersRadius="6dp"
+        app:bl_strokeWidth="1dp">
+
+        <TextView
+            android:id="@+id/botMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000" />
+    </com.daasuu.bl.BubbleLayout>
+
+
+
+
+</RelativeLayout>

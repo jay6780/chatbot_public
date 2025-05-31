@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="#333446">
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/Yes"
+        android:background="@drawable/round_button2"
+        android:layout_width="90dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:textSize="15dp"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="Saved"/>
+
+</LinearLayout>
