@@ -178,25 +178,30 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         builder.show();
     }
     public void removeMessage(int position,boolean isDeleteAll) {
-        Log.d("DeleteAll","VALUE: "+isDeleteAll);
+//        Log.d("DeleteAll","VALUE: "+isDeleteAll);
         if (position >= 0 && position < messageList.size()) {
             ChatMessage message = messageList.get(position);
-            if(isDeleteAll){
+
+            if (isDeleteAll) {
                 databaseExecutor.execute(() -> {
                     chatMessageDao.deleteAll();
+                    ((Activity) context).runOnUiThread(() -> {
+                        messageList.clear();
+                        showdefault.showBot();
+                        notifyDataSetChanged();
+                    });
                 });
-                messageList.clear();
-                messageList.remove(message);
-                showdefault.showBot();
-
-            }else{
+            } else {
+                ChatMessage messageToDelete = new ChatMessage(message.getMessage(), message.isUser());
+                messageToDelete.setId(message.getId());
                 databaseExecutor.execute(() -> {
-                    chatMessageDao.delete(message);
+                    chatMessageDao.deleteById(message.getId());
+                    ((Activity) context).runOnUiThread(() -> {
+                        messageList.remove(position);
+                        notifyItemRemoved(position);
+                    });
                 });
-                messageList.remove(position);
-                notifyItemRemoved(position);
             }
-
         }
     }
 

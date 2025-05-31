@@ -12,14 +12,13 @@ import java.util.List;
 @Dao
 public interface ChatMessageDao {
     @Insert
-    void insert(ChatMessage message);
-    
+    long insert(ChatMessage message);
+
     @Query("SELECT * FROM chat_messages ORDER BY timestamp ASC")
     List<ChatMessage> getAllMessages();
-    
+
     @Query("DELETE FROM chat_messages")
     void deleteAll();
-
-    @Delete
-    void delete(ChatMessage message);
+    @Query("DELETE FROM chat_messages WHERE id = :id")
+    void deleteById(int id);
 }

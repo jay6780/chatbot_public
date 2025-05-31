@@ -145,7 +145,8 @@ public class MainActivity extends AppCompatActivity implements GenderListener, D
             chatEditText.setText("");
         });
         databaseExecutor.execute(() -> {
-            chatMessageDao.insert(userMessage);
+            long id = chatMessageDao.insert(userMessage);
+            userMessage.setId((int) id);
             new Thread(() -> {
                 OkHttpClient client = new OkHttpClient.Builder()
                         .connectTimeout(30, TimeUnit.SECONDS)
@@ -184,7 +185,10 @@ public class MainActivity extends AppCompatActivity implements GenderListener, D
                             chatRecycler.scrollToPosition(chatAdapter.getItemCount() - 1);
                         });
 
-                        databaseExecutor.execute(() -> chatMessageDao.insert(botMessage));
+                        databaseExecutor.execute(() -> {
+                            long botId = chatMessageDao.insert(botMessage);
+                            botMessage.setId((int) botId);
+                        });
                     } else {
                         Log.e(TAG, "Request failed: " + response.code());
                         runOnUiThread(() -> {
