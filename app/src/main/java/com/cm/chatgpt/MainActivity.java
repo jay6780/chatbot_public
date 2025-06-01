@@ -79,7 +79,9 @@ public class MainActivity extends AppCompatActivity implements GenderListener, D
         chatbotTxt = findViewById(R.id.chatbotTxt);
         send = findViewById(R.id.send);
         send.setOnClickListener(view -> sendChatRequest());
-        chatRecycler.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setStackFromEnd(true);
+        chatRecycler.setLayoutManager(layoutManager);
 
         db = Room.databaseBuilder(getApplicationContext(),
                         AppDatabase.class, "chat-database")
@@ -229,6 +231,7 @@ public class MainActivity extends AppCompatActivity implements GenderListener, D
         avatarRecycler.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
         avatarAdapter = new AvatarAdapter(this,avatarList,this);
         avatarRecycler.setAdapter(avatarAdapter);
+        yes.setText("Save");
         yes.setOnClickListener(view -> {
             savedGender(Mygender, dialog, AvatarValue);
         });
@@ -238,6 +241,10 @@ public class MainActivity extends AppCompatActivity implements GenderListener, D
 
 
     private void savedGender(String mygender, DialogPlus dialog,int AvatarValue) {
+        if(mygender == null){
+            Toast.makeText(getApplicationContext(), "Please select avatar", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (!mygender.equalsIgnoreCase("Male") && !mygender.equalsIgnoreCase("Female")) {
             Toast.makeText(getApplicationContext(), "Only accepts Male & Female", Toast.LENGTH_SHORT).show();
             return;

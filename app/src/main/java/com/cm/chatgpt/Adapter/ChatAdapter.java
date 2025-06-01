@@ -160,7 +160,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                         ClipboardManager clipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                         ClipData clip = ClipData.newPlainText(null,chatMessage.getMessage());
                         clipboard.setPrimaryClip(clip);
-                        Toast.makeText(context,"Copied success",Toast.LENGTH_SHORT).show();
                         break;
 
                     case 1:
