@@ -197,7 +197,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                     chatMessageDao.deleteById(message.getId());
                     ((Activity) context).runOnUiThread(() -> {
                         messageList.remove(position);
-                        notifyItemRemoved(position);
+                        if (messageList.size() == 0) {
+                            showdefault.showBot();
+                        } else {
+                            notifyDataSetChanged();
+                            notifyItemRemoved(position);
+                        }
                     });
                 });
             }
